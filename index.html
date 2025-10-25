@@ -272,7 +272,7 @@
         </div>
     </div>
 
-    <!-- *** SECCIÓN HERO CON TEXTO IZQUIERDA OSCURO SOBRE VIDEO *** --><section class="relative h-[600px] sm:h-[700px] md:h-[800px] lg:h-[70vh] xl:h-[80vh] overflow-hidden"> 
+    <!-- *** SECCIÓN HERO CON TEXTO A LA IZQUIERDA SOBRE VIDEO *** --><section class="relative h-[600px] sm:h-[700px] md:h-[800px] lg:h-[70vh] xl:h-[80vh] overflow-hidden"> 
         <!-- Video Background --><div class="absolute inset-0 z-0">
              <video 
                 src="o-gray-hero.mp4" 
@@ -287,30 +287,26 @@
             </video>
         </div>
 
-        <!-- Overlay Eliminado -->
+        <!-- Overlay de Oscuridad para el Texto Blanco --><div class="absolute inset-0 bg-black/40 z-10"></div>
         
-        <!-- Text Content Container --><div class="relative z-20 h-full flex items-center justify-start text-left">
-            <div class="max-w-2xl px-4 sm:px-6 lg:px-8 lg:pl-16 xl:pl-24 space-y-6 md:space-y-8 fade-in-up"> 
+        <!-- Text Content Container --><!-- Cambiado a justify-start y text-left --><div class="relative z-20 h-full flex items-center justify-start text-left">
+            <!-- Eliminado mx-auto, ajustado padding izquierdo --><div class="max-w-2xl px-4 sm:px-6 lg:px-8 lg:pl-16 xl:pl-24 space-y-6 md:space-y-8 fade-in-up"> 
                 
-                <!-- Texto cambiado a brand-primary (oscuro) -->
-                <h2 class="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-black tracking-tight leading-[1.1] text-balance text-brand-primary"> 
+                <!-- *** TAMAÑOS DE FUENTE AJUSTADOS PARA QUE NO SE CORTEN *** --><!-- Texto cambiado a blanco --><h2 class="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-black tracking-tight leading-[1.1] text-balance text-white"> 
                     EL FUTURO DE TU CABELLO ESTÁ AQUÍ
                 </h2>
                 
-                <!-- Texto cambiado a gris oscuro -->
-                <p class="text-lg sm:text-xl lg:text-2xl text-gray-700 leading-relaxed text-pretty font-medium"> 
+                <!-- *** TAMAÑO DE FUENTE AJUSTADO *** --><!-- Texto cambiado a blanco/opacidad --><p class="text-lg sm:text-xl lg:text-2xl text-white/90 leading-relaxed text-pretty font-medium"> 
                     Descubre O'GRAY, la ciencia de la repigmentación.
                 </p>
                 
                 <div class="pt-4">
-                    <!-- Botón CTA usa color Verde -->
-                    <a href="#comprar" class="inline-block bg-brand-accent hover:opacity-80 text-white font-bold px-10 py-5 rounded-xl transition-all text-lg shadow-lg hover:shadow-xl hover:scale-105 transform uppercase tracking-wide"> 
+                    <!-- Botón CTA usa color Verde --><a href="#comprar" class="inline-block bg-brand-accent hover:opacity-80 text-white font-bold px-10 py-5 rounded-xl transition-all text-lg shadow-2xl hover:shadow-3xl hover:scale-105 transform uppercase tracking-wide"> 
                         Comprar Ahora
                     </a>
                 </div>
                 
-                <!-- Iconos y texto cambiados a brand-primary/opacidad -->
-                <div class="flex flex-wrap items-center justify-start gap-6 md:gap-8 pt-4 text-brand-primary/90"> 
+                <!-- Iconos y texto cambiados a blanco/opacidad --><div class="flex flex-wrap items-center justify-start gap-6 md:gap-8 pt-4 text-white/90"> 
                     <div class="flex items-center gap-2">
                         <i class="ph ph-truck text-xl md:text-2xl"></i> 
                         <span class="text-xs sm:text-sm font-medium">Envío Gratis</span> 
@@ -327,7 +323,7 @@
             </div>
         </div>
         
-    </section>
+        <!-- Eliminada la ola SVG --></section>
 
     <!-- Products Section --><section id="productos" class="py-16 sm:py-20 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -566,7 +562,7 @@
                 
                 <!-- After Image --><div class="relative group fade-in-up delay-200">
                     <img 
-                        src="despues.jpg" 
+                        src="después.jpg" 
                         alt="Después - Semana 8"
                         class="w-full h-auto rounded-xl shadow-lg hover:shadow-2xl transition-all object-cover" 
                         onerror="this.src='https://placehold.co/1000x1200/eeeeee/999999?text=Imagen+no+disponible'"
@@ -954,3 +950,4 @@
 
 </body>
 </html>
+
