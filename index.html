@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REVERSAL - Suero Peptídico para Reversión de Canas</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts - Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        .carousel-container {
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none;
+            -webkit-overflow-scrolling: touch;
+        }
+        .carousel-container::-webkit-scrollbar {
+            display: none;
+        }
+        .carousel-item {
+            scroll-snap-align: center;
+        }
+        
+        /* Added fade-in animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+        
+        /* Added stagger delays for animations */
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        .delay-400 { animation-delay: 0.4s; }
+    </style>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'brand-primary': '#1a1a1a',
+                        'brand-accent': '#10b981',
+                        'brand-light': '#f8f9fa',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-white text-gray-900 antialiased">
+    
+    <!-- Top Utility Bar -->
+    <div class="bg-brand-primary text-white text-sm py-2">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-wrap items-center justify-between gap-4">
+                <div class="flex items-center gap-6">
+                    <button class="flex items-center gap-2 hover:text-brand-accent transition-colors">
+                        <i class="ph ph-map-pin"></i>
+                        <span class="hidden sm:inline">TIENDAS</span>
+                    </button>
+                    <button class="flex items-center gap-2 hover:text-brand-accent transition-colors">
+                        <i class="ph ph-headset"></i>
+                        <span class="hidden sm:inline">ATENCIÓN AL CLIENTE</span>
+                    </button>
+                </div>
+                <div class="text-xs text-gray-400">
+                    Envío gratis en pedidos mayores a $50
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Header -->
+    <header class="sticky top-0 z-50 bg-brand-primary text-white border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0">
+                    <h1 class="text-2xl md:text-3xl font-bold tracking-tight">REVERSAL.</h1>
+                </div>
+                
+                <!-- Navigation (Hidden on mobile) -->
+                <nav class="hidden lg:flex items-center space-x-8">
+                    <a href="#productos" class="text-sm font-medium hover:text-brand-accent transition-colors uppercase tracking-wide">Productos</a>
+                    <a href="#ciencia" class="text-sm font-medium hover:text-brand-accent transition-colors uppercase tracking-wide">Ciencia</a>
+                    <a href="#resultados" class="text-sm font-medium hover:text-brand-accent transition-colors uppercase tracking-wide">Resultados</a>
+                    <a href="#comprar" class="text-sm font-medium hover:text-brand-accent transition-colors uppercase tracking-wide">Comprar</a>
+                </nav>
+                
+                <!-- Search and Icons -->
+                <div class="flex items-center gap-2 sm:gap-4">
+                    <!-- Search Bar (Hidden on small mobile) -->
+                    <div class="hidden md:flex items-center bg-white/10 rounded-lg px-4 py-2 w-48 lg:w-64">
+                        <input 
+                            type="text" 
+                            placeholder="Buscar" 
+                            class="bg-transparent text-white placeholder-gray-400 outline-none text-sm w-full"
+                        />
+                        <i class="ph ph-magnifying-glass text-lg"></i>
+                    </div>
+                    
+                    <button onclick="toggleLogin()" class="p-2 hover:bg-white/10 rounded-full transition-colors" aria-label="Cuenta">
+                        <i class="ph ph-user text-2xl"></i>
+                    </button>
+                    <button onclick="toggleCart()" class="p-2 hover:bg-white/10 rounded-full transition-colors relative" aria-label="Carrito">
+                        <i class="ph ph-shopping-cart text-2xl"></i>
+                        <span id="cart-badge" class="absolute top-0 right-0 w-5 h-5 bg-brand-accent text-white text-xs rounded-full flex items-center justify-center font-semibold">0</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Login Modal -->
+    <div id="login-modal" class="hidden fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full p-6 sm:p-8 relative">
+            <button onclick="toggleLogin()" class="absolute top-4 right-4 p-2 hover:bg-gray-100 rounded-full transition-colors">
+                <i class="ph ph-x text-xl"></i>
+            </button>
+            
+            <h2 class="text-2xl font-bold mb-6 text-brand-primary">Iniciar Sesión</h2>
+            
+            <form class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Correo Electrónico</label>
+                    <input type="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent outline-none transition-all" placeholder="tu@email.com" />
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Contraseña</label>
+                    <input type="password" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent outline-none transition-all" placeholder="••••••••" />
+                </div>
+                
+                <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 text-sm">
+                    <label class="flex items-center gap-2">
+                        <input type="checkbox" class="w-4 h-4 text-brand-accent rounded" />
+                        <span class="text-gray-600">Recordarme</span>
+                    </label>
+                    <a href="#" class="text-brand-accent hover:underline">¿Olvidaste tu contraseña?</a>
+                </div>
+                
+                <button type="submit" class="w-full bg-brand-accent hover:bg-emerald-600 text-white font-semibold py-3 rounded-lg transition-all">
+                    Iniciar Sesión
+                </button>
+            </form>
+            
+            <div class="mt-6 text-center text-sm text-gray-600">
+                ¿No tienes cuenta? <button onclick="toggleLogin(); toggleRegister();" class="text-brand-accent hover:underline font-semibold">Regístrate</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Registration Modal -->
+    <div id="register-modal" class="hidden fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full p-6 sm:p-8 relative">
+            <button onclick="toggleRegister()" class="absolute top-4 right-4 p-2 hover:bg-gray-100 rounded-full transition-colors">
+                <i class="ph ph-x text-xl"></i>
+            </button>
+            
+            <h2 class="text-2xl font-bold mb-6 text-brand-primary">Crear Cuenta</h2>
+            
+            <form class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Nombre Completo</label>
+                    <input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent outline-none transition-all" placeholder="Juan Pérez" />
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Correo Electrónico</label>
+                    <input type="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent outline-none transition-all" placeholder="tu@email.com" />
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Contraseña</label>
+                    <input type="password" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent outline-none transition-all" placeholder="••••••••" />
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Confirmar Contraseña</label>
+                    <input type="password" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent outline-none transition-all" placeholder="••••••••" />
+                </div>
+                
+                <div class="text-sm">
+                    <label class="flex items-start gap-2">
+                        <input type="checkbox" class="w-4 h-4 text-brand-accent rounded mt-1" />
+                        <span class="text-gray-600">Acepto los <a href="#" class="text-brand-accent hover:underline">términos y condiciones</a> y la <a href="#" class="text-brand-accent hover:underline">política de privacidad</a></span>
+                    </label>
+                </div>
+                
+                <button type="submit" class="w-full bg-brand-accent hover:bg-emerald-600 text-white font-semibold py-3 rounded-lg transition-all">
+                    Crear Cuenta
+                </button>
+            </form>
+            
+            <div class="mt-6 text-center text-sm text-gray-600">
+                ¿Ya tienes cuenta? <button onclick="toggleRegister(); toggleLogin();" class="text-brand-accent hover:underline font-semibold">Inicia Sesión</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Shopping Cart Modal -->
+    <div id="cart-modal" class="hidden fixed inset-0 z-50 bg-black/50 backdrop-blur-sm">
+        <div class="absolute right-0 top-0 h-full w-full sm:w-96 md:w-[28rem] bg-white shadow-2xl flex flex-col">
+            <div class="flex items-center justify-between p-4 sm:p-6 border-b">
+                <h2 class="text-xl sm:text-2xl font-bold text-brand-primary">Tu Carrito</h2>
+                <button onclick="toggleCart()" class="p-2 hover:bg-gray-100 rounded-full transition-colors">
+                    <i class="ph ph-x text-xl"></i>
+                </button>
+            </div>
+            
+            <div id="cart-items" class="flex-1 overflow-y-auto p-4 sm:p-6">
+                <div class="text-center text-gray-500 py-12">
+                    <i class="ph ph-shopping-cart text-6xl mb-4 block"></i>
+                    <p>Tu carrito está vacío</p>
+                </div>
+            </div>
+            
+            <div class="border-t p-4 sm:p-6 space-y-4">
+                <div class="flex items-center justify-between text-lg font-semibold">
+                    <span>Total:</span>
+                    <span id="cart-total" class="text-brand-accent text-2xl">$0.00</span>
+                </div>
+                <button class="w-full bg-brand-accent hover:bg-emerald-600 text-white font-bold py-4 rounded-lg transition-all">
+                    Proceder al Pago
+                </button>
+                <button onclick="toggleCart()" class="w-full border-2 border-gray-300 hover:border-gray-400 font-semibold py-4 rounded-lg transition-all">
+                    Continuar Comprando
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Redesigned hero section with green gradient background and product image on left -->
+    <section class="relative py-16 md:py-20 lg:py-24 xl:py-32 overflow-hidden bg-gradient-to-br from-emerald-600 via-emerald-500 to-teal-500">
+        <!-- Decorative overlay -->
+        <div class="absolute inset-0 bg-black/10"></div>
+        
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+                <!-- Left Column - Product Image -->
+                <div class="order-2 lg:order-1 fade-in-up">
+                    <div class="relative">
+                        <img 
+                            src="/placeholder.svg?height=1400&width=1400" 
+                            alt="Suero Peptídico Reversal"
+                            class="w-full h-auto drop-shadow-2xl hover:scale-105 transition-transform duration-500"
+                        />
+                    </div>
+                </div>
+                
+                <!-- Right Column - Text Content -->
+                <div class="order-1 lg:order-2 space-y-8 fade-in-up delay-200">
+                    <div class="inline-block">
+                        <span class="bg-white/20 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm font-semibold uppercase tracking-wide">
+                            Regalo en compra ↓
+                        </span>
+                    </div>
+                    
+                    <h2 class="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-black tracking-tight leading-[1.05] text-balance text-white">
+                        NUESTRO SUERO PEPTÍDICO ESTÁ DE REGRESO
+                    </h2>
+                    
+                    <p class="text-xl sm:text-2xl lg:text-3xl text-white/95 leading-relaxed text-pretty font-medium">
+                        ¡Encuentra una sorpresa cada día!
+                    </p>
+                    
+                    <div class="pt-4">
+                        <a href="#comprar" class="inline-block bg-white hover:bg-gray-100 text-brand-primary font-bold px-12 py-6 rounded-xl transition-all text-xl shadow-2xl hover:shadow-3xl hover:scale-105 transform uppercase tracking-wide">
+                            Comprar Ahora
+                        </a>
+                    </div>
+                    
+                    <div class="flex flex-wrap items-center gap-8 pt-4 text-white/90">
+                        <div class="flex items-center gap-2">
+                            <i class="ph ph-truck text-2xl"></i>
+                            <span class="text-sm font-medium">Envío Gratis</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="ph ph-shield-check text-2xl"></i>
+                            <span class="text-sm font-medium">Garantía 30 Días</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="ph ph-certificate text-2xl"></i>
+                            <span class="text-sm font-medium">Clínicamente Probado</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Decorative wave at bottom -->
+        <div class="absolute bottom-0 left-0 right-0">
+            <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto">
+                <path d="M0 0L60 10C120 20 240 40 360 46.7C480 53 600 47 720 43.3C840 40 960 40 1080 46.7C1200 53 1320 67 1380 73.3L1440 80V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0V0Z" fill="white"/>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Added alternating background and increased font sizes -->
+    <section id="productos" class="py-16 sm:py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 sm:mb-16 fade-in-up">
+                <h2 class="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 text-brand-primary">Nuestros Productos</h2>
+                <p class="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto">
+                    Descubre nuestra línea completa de productos para el cuidado capilar
+                </p>
+            </div>
+            
+            <div class="relative">
+                <div id="carousel" class="carousel-container flex gap-6 sm:gap-8 overflow-x-auto pb-4">
+                    <!-- Product 1 -->
+                    <!-- Increased carousel product images to 600x600 -->
+                    <div class="carousel-item flex-shrink-0 w-80 sm:w-96 fade-in-up delay-100">
+                        <div class="bg-brand-light rounded-2xl p-6 sm:p-8 h-full transition-all hover:scale-105 hover:shadow-xl">
+                            <img src="/placeholder.svg?height=600&width=600" alt="Suero Peptídico" class="w-full h-56 sm:h-72 object-cover rounded-xl mb-6" />
+                            <h3 class="font-bold text-xl sm:text-2xl mb-3">Suero Peptídico</h3>
+                            <p class="text-gray-600 text-base mb-6">Tratamiento intensivo para reversión de canas</p>
+                            <div class="flex items-center justify-between">
+                                <span class="text-2xl sm:text-3xl font-bold text-brand-accent">$59.99</span>
+                                <button onclick="addToCart('Suero Peptídico', 59.99)" class="bg-brand-accent hover:bg-emerald-600 text-white px-6 sm:px-8 py-3 rounded-lg transition-all text-base font-semibold">
+                                    Añadir
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Product 2 -->
+                    <div class="carousel-item flex-shrink-0 w-80 sm:w-96 fade-in-up delay-200">
+                        <div class="bg-brand-light rounded-2xl p-6 sm:p-8 h-full transition-all hover:scale-105 hover:shadow-xl">
+                            <img src="/placeholder.svg?height=600&width=600" alt="Shampoo Fortificante" class="w-full h-56 sm:h-72 object-cover rounded-xl mb-6" />
+                            <h3 class="font-bold text-xl sm:text-2xl mb-3">Shampoo Fortificante</h3>
+                            <p class="text-gray-600 text-base mb-6">Limpieza profunda con protección de color</p>
+                            <div class="flex items-center justify-between">
+                                <span class="text-2xl sm:text-3xl font-bold text-brand-accent">$29.99</span>
+                                <button onclick="addToCart('Shampoo Fortificante', 29.99)" class="bg-brand-accent hover:bg-emerald-600 text-white px-6 sm:px-8 py-3 rounded-lg transition-all text-base font-semibold">
+                                    Añadir
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Product 3 -->
+                    <div class="carousel-item flex-shrink-0 w-80 sm:w-96 fade-in-up delay-300">
+                        <div class="bg-brand-light rounded-2xl p-6 sm:p-8 h-full transition-all hover:scale-105 hover:shadow-xl">
+                            <img src="/placeholder.svg?height=600&width=600" alt="Acondicionador" class="w-full h-56 sm:h-72 object-cover rounded-xl mb-6" />
+                            <h3 class="font-bold text-xl sm:text-2xl mb-3">Acondicionador Nutritivo</h3>
+                            <p class="text-gray-600 text-base mb-6">Hidratación profunda y brillo natural</p>
+                            <div class="flex items-center justify-between">
+                                <span class="text-2xl sm:text-3xl font-bold text-brand-accent">$29.99</span>
+                                <button onclick="addToCart('Acondicionador Nutritivo', 29.99)" class="bg-brand-accent hover:bg-emerald-600 text-white px-6 sm:px-8 py-3 rounded-lg transition-all text-base font-semibold">
+                                    Añadir
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Product 4 -->
+                    <div class="carousel-item flex-shrink-0 w-80 sm:w-96 fade-in-up delay-400">
+                        <div class="bg-brand-light rounded-2xl p-6 sm:p-8 h-full transition-all hover:scale-105 hover:shadow-xl">
+                            <img src="/placeholder.svg?height=600&width=600" alt="Kit Completo" class="w-full h-56 sm:h-72 object-cover rounded-xl mb-6" />
+                            <h3 class="font-bold text-xl sm:text-2xl mb-3">Kit Completo</h3>
+                            <p class="text-gray-600 text-base mb-6">Rutina completa para mejores resultados</p>
+                            <div class="flex items-center justify-between">
+                                <span class="text-2xl sm:text-3xl font-bold text-brand-accent">$99.99</span>
+                                <button onclick="addToCart('Kit Completo', 99.99)" class="bg-brand-accent hover:bg-emerald-600 text-white px-6 sm:px-8 py-3 rounded-lg transition-all text-base font-semibold">
+                                    Añadir
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Carousel Navigation -->
+                <button onclick="scrollCarousel(-1)" class="hidden md:block absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 bg-white shadow-lg rounded-full p-3 hover:bg-gray-50 transition-all">
+                    <i class="ph ph-caret-left text-2xl"></i>
+                </button>
+                <button onclick="scrollCarousel(1)" class="hidden md:block absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 bg-white shadow-lg rounded-full p-3 hover:bg-gray-50 transition-all">
+                    <i class="ph ph-caret-right text-2xl"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Added gradient background and increased font sizes -->
+    <section class="py-16 sm:py-20 md:py-28 bg-gradient-to-b from-gray-50 to-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 sm:mb-16 fade-in-up">
+                <h2 class="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 text-balance text-brand-primary">
+                    ¿Por qué elegir <span class="text-brand-accent">REVERSAL</span>?
+                </h2>
+                <p class="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto text-pretty">
+                    No somos solo otro producto para el cabello. Somos ciencia respaldada por resultados.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10 max-w-6xl mx-auto">
+                <!-- Advantage 1 -->
+                <div class="bg-white rounded-2xl p-8 sm:p-10 shadow-lg hover:shadow-2xl transition-all hover:scale-105 fade-in-up delay-100">
+                    <div class="w-16 h-16 sm:w-18 sm:h-18 bg-brand-accent/10 rounded-full flex items-center justify-center mb-6">
+                        <i class="ph ph-flask text-3xl sm:text-4xl text-brand-accent"></i>
+                    </div>
+                    <h3 class="text-xl sm:text-2xl font-bold mb-4 text-brand-primary">Fórmula Científica</h3>
+                    <p class="text-gray-600 leading-relaxed text-base">
+                        Desarrollado con péptidos biomédicos de última generación, no solo tintes temporales. Revertimos el proceso desde la raíz.
+                    </p>
+                </div>
+                
+                <!-- Advantage 2 -->
+                <div class="bg-white rounded-2xl p-8 sm:p-10 shadow-lg hover:shadow-2xl transition-all hover:scale-105 fade-in-up delay-200">
+                    <div class="w-16 h-16 sm:w-18 sm:h-18 bg-brand-accent/10 rounded-full flex items-center justify-center mb-6">
+                        <i class="ph ph-certificate text-3xl sm:text-4xl text-brand-accent"></i>
+                    </div>
+                    <h3 class="text-xl sm:text-2xl font-bold mb-4 text-brand-primary">Clínicamente Probado</h3>
+                    <p class="text-gray-600 leading-relaxed text-base">
+                        Estudios independientes demuestran 90% de efectividad en 8 semanas. Resultados reales, no promesas vacías.
+                    </p>
+                </div>
+                
+                <!-- Advantage 3 -->
+                <div class="bg-white rounded-2xl p-8 sm:p-10 shadow-lg hover:shadow-2xl transition-all hover:scale-105 fade-in-up delay-300">
+                    <div class="w-16 h-16 sm:w-18 sm:h-18 bg-brand-accent/10 rounded-full flex items-center justify-center mb-6">
+                        <i class="ph ph-leaf text-3xl sm:text-4xl text-brand-accent"></i>
+                    </div>
+                    <h3 class="text-xl sm:text-2xl font-bold mb-4 text-brand-primary">Ingredientes Naturales</h3>
+                    <p class="text-gray-600 leading-relaxed text-base">
+                        Sin parabenos, sulfatos ni químicos agresivos. Ectoína y niacinamida para protección y nutrición natural.
+                    </p>
+                </div>
+                
+                <!-- Advantage 4 -->
+                <div class="bg-white rounded-2xl p-8 sm:p-10 shadow-lg hover:shadow-2xl transition-all hover:scale-105 fade-in-up delay-100">
+                    <div class="w-16 h-16 sm:w-18 sm:h-18 bg-brand-accent/10 rounded-full flex items-center justify-center mb-6">
+                        <i class="ph ph-clock text-3xl sm:text-4xl text-brand-accent"></i>
+                    </div>
+                    <h3 class="text-xl sm:text-2xl font-bold mb-4 text-brand-primary">Resultados Rápidos</h3>
+                    <p class="text-gray-600 leading-relaxed text-base">
+                        Mientras otros productos tardan meses, REVERSAL muestra cambios visibles en solo 8 semanas de uso constante.
+                    </p>
+                </div>
+                
+                <!-- Advantage 5 -->
+                <div class="bg-white rounded-2xl p-8 sm:p-10 shadow-lg hover:shadow-2xl transition-all hover:scale-105 fade-in-up delay-200">
+                    <div class="w-16 h-16 sm:w-18 sm:h-18 bg-brand-accent/10 rounded-full flex items-center justify-center mb-6">
+                        <i class="ph ph-users text-3xl sm:text-4xl text-brand-accent"></i>
+                    </div>
+                    <h3 class="text-xl sm:text-2xl font-bold mb-4 text-brand-primary">Comunidad Activa</h3>
+                    <p class="text-gray-600 leading-relaxed text-base">
+                        Más de 10,000 usuarios satisfechos comparten sus transformaciones. Únete a la revolución capilar.
+                    </p>
+                </div>
+                
+                <!-- Advantage 6 -->
+                <div class="bg-white rounded-2xl p-8 sm:p-10 shadow-lg hover:shadow-2xl transition-all hover:scale-105 fade-in-up delay-300">
+                    <div class="w-16 h-16 sm:w-18 sm:h-18 bg-brand-accent/10 rounded-full flex items-center justify-center mb-6">
+                        <i class="ph ph-shield-check text-3xl sm:text-4xl text-brand-accent"></i>
+                    </div>
+                    <h3 class="text-xl sm:text-2xl font-bold mb-4 text-brand-primary">Garantía Total</h3>
+                    <p class="text-gray-600 leading-relaxed text-base">
+                        30 días de garantía de devolución. Si no ves resultados, te devolvemos tu dinero sin preguntas.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Increased font sizes for benefits section -->
+    <section id="ciencia" class="py-16 sm:py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10">
+                <!-- Benefit 1 -->
+                <div class="text-center space-y-4 fade-in-up delay-100">
+                    <div class="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 bg-white rounded-full shadow-lg">
+                        <i class="ph ph-atom text-3xl sm:text-4xl text-brand-accent"></i>
+                    </div>
+                    <h3 class="font-bold text-lg sm:text-xl text-brand-primary">Péptidos Potentes</h3>
+                    <p class="text-base text-gray-600">Tecnología avanzada para reactivar la melanina</p>
+                </div>
+                
+                <!-- Benefit 2 -->
+                <div class="text-center space-y-4 fade-in-up delay-200">
+                    <div class="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 bg-white rounded-full shadow-lg">
+                        <i class="ph ph-shield text-3xl sm:text-4xl text-brand-accent"></i>
+                    </div>
+                    <h3 class="font-bold text-lg sm:text-xl text-brand-primary">Protección (Ectoína)</h3>
+                    <p class="text-base text-gray-600">Defensa contra el estrés ambiental</p>
+                </div>
+                
+                <!-- Benefit 3 -->
+                <div class="text-center space-y-4 fade-in-up delay-300">
+                    <div class="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 bg-white rounded-full shadow-lg">
+                        <i class="ph ph-drop text-3xl sm:text-4xl text-brand-accent"></i>
+                    </div>
+                    <h3 class="font-bold text-lg sm:text-xl text-brand-primary">Hidratación (Niacinamida)</h3>
+                    <p class="text-base text-gray-600">Nutrición profunda del cuero cabelludo</p>
+                </div>
+                
+                <!-- Benefit 4 -->
+                <div class="text-center space-y-4 fade-in-up delay-400">
+                    <div class="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 bg-white rounded-full shadow-lg">
+                        <i class="ph ph-check-circle text-3xl sm:text-4xl text-brand-accent"></i>
+                    </div>
+                    <h3 class="font-bold text-lg sm:text-xl text-brand-primary">Resultados Visibles</h3>
+                    <p class="text-base text-gray-600">Cambios notables en 8 semanas</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Added gradient background and increased font sizes -->
+    <section id="resultados" class="py-16 sm:py-20 md:py-28 bg-gradient-to-b from-gray-50 to-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 sm:mb-16 fade-in-up">
+                <h2 class="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 text-balance text-brand-primary">
+                    Resultados Reales. <span class="text-brand-accent">Visiblemente tú.</span>
+                </h2>
+                <p class="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto text-pretty">
+                    9 de cada 10 usuarios vieron una repigmentación visible después de 8 semanas de uso constante.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 lg:gap-10 max-w-5xl mx-auto">
+                <!-- Before Image -->
+                <!-- Increased before/after images to 1000x1200 for better detail -->
+                <div class="relative group fade-in-up delay-100">
+                    <img 
+                        src="/placeholder.svg?height=1200&width=1000" 
+                        alt="Antes - Semana 1"
+                        class="w-full h-auto rounded-xl shadow-lg hover:shadow-2xl transition-all"
+                    />
+                    <div class="absolute top-4 left-4 bg-white/95 backdrop-blur-sm px-5 py-3 rounded-full shadow-md border border-gray-200">
+                        <span class="text-sm sm:text-base font-bold text-gray-900">ANTES (Semana 1)</span>
+                    </div>
+                </div>
+                
+                <!-- After Image -->
+                <div class="relative group fade-in-up delay-200">
+                    <img 
+                        src="/placeholder.svg?height=1200&width=1000" 
+                        alt="Después - Semana 8"
+                        class="w-full h-auto rounded-xl shadow-lg hover:shadow-2xl transition-all"
+                    />
+                    <div class="absolute top-4 left-4 bg-white/95 backdrop-blur-sm px-5 py-3 rounded-full shadow-md border border-gray-200">
+                        <span class="text-sm sm:text-base font-bold text-gray-900">DESPUÉS (Semana 8)</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Increased stats font sizes -->
+            <div class="mt-12 sm:mt-16 grid grid-cols-3 gap-6 sm:gap-8 max-w-3xl mx-auto">
+                <div class="text-center fade-in-up delay-100">
+                    <div class="text-3xl sm:text-4xl lg:text-5xl font-black text-brand-accent">90%</div>
+                    <div class="text-sm sm:text-base text-gray-600 mt-2">Repigmentación visible</div>
+                </div>
+                <div class="text-center fade-in-up delay-200">
+                    <div class="text-3xl sm:text-4xl lg:text-5xl font-black text-brand-accent">8</div>
+                    <div class="text-sm sm:text-base text-gray-600 mt-2">Semanas promedio</div>
+                </div>
+                <div class="text-center fade-in-up delay-300">
+                    <div class="text-3xl sm:text-4xl lg:text-5xl font-black text-brand-accent">4.9</div>
+                    <div class="text-sm sm:text-base text-gray-600 mt-2">Calificación promedio</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Increased font sizes for purchase section -->
+    <section id="comprar" class="py-16 sm:py-20 md:py-28 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center max-w-6xl mx-auto">
+                <!-- Left Column - Product Image -->
+                <div class="order-2 lg:order-1 fade-in-up">
+                    <!-- Increased purchase section image to 1200x1200 for detailed product view -->
+                    <img 
+                        src="/placeholder.svg?height=1200&width=1200" 
+                        alt="Suero Peptídico Reversal - Detalle"
+                        class="w-full h-auto rounded-2xl shadow-2xl hover:scale-105 transition-transform duration-500"
+                    />
+                </div>
+                
+                <!-- Right Column - Purchase Form -->
+                <div class="order-1 lg:order-2 bg-gradient-to-br from-gray-50 to-white rounded-2xl shadow-xl p-8 sm:p-10 lg:p-12 fade-in-up delay-200">
+                    <h3 class="text-3xl sm:text-4xl font-bold mb-3 text-brand-primary">Suero Peptídico Reversal</h3>
+                    
+                    <!-- Reviews -->
+                    <div class="flex items-center gap-2 mb-8">
+                        <div class="flex text-yellow-400 text-xl">
+                            <i class="ph-fill ph-star"></i>
+                            <i class="ph-fill ph-star"></i>
+                            <i class="ph-fill ph-star"></i>
+                            <i class="ph-fill ph-star"></i>
+                            <i class="ph-fill ph-star"></i>
+                        </div>
+                        <span class="text-base text-gray-600">(120 Reseñas)</span>
+                    </div>
+                    
+                    <!-- Price -->
+                    <div class="mb-8">
+                        <span class="text-4xl sm:text-5xl font-black text-brand-accent">$59.99</span>
+                        <span class="text-gray-500 ml-2 text-lg">USD</span>
+                    </div>
+                    
+                    <!-- Purchase Options -->
+                    <div class="space-y-4 mb-10">
+                        <!-- Option 1 -->
+                        <label class="flex items-center p-5 border-2 border-gray-200 rounded-xl cursor-pointer hover:border-gray-300 transition-colors">
+                            <input type="radio" name="purchase-option" class="w-5 h-5 text-brand-accent" />
+                            <div class="ml-4 flex-1">
+                                <div class="font-semibold text-base sm:text-lg">Compra única</div>
+                                <div class="text-base text-gray-600">$59.99</div>
+                            </div>
+                        </label>
+                        
+                        <!-- Option 2 - Highlighted -->
+                        <label class="flex items-center p-5 border-2 border-brand-accent bg-emerald-50 rounded-xl cursor-pointer relative">
+                            <input type="radio" name="purchase-option" class="w-5 h-5 text-brand-accent" checked />
+                            <div class="ml-4 flex-1">
+                                <div class="font-semibold flex flex-wrap items-center gap-2 text-base sm:text-lg">
+                                    Suscríbete y Ahorra 15%
+                                    <span class="text-xs bg-brand-accent text-white px-3 py-1 rounded-full font-bold">POPULAR</span>
+                                </div>
+                                <div class="text-base text-gray-600">
+                                    <span class="font-bold text-brand-accent text-lg">$50.99</span>
+                                    <span class="line-through ml-2">$59.99</span>
+                                </div>
+                            </div>
+                        </label>
+                    </div>
+                    
+                    <!-- CTA Button -->
+                    <button class="w-full bg-brand-accent hover:bg-emerald-600 text-white font-bold py-5 px-6 rounded-xl transition-all mb-6 text-lg shadow-lg hover:shadow-xl hover:scale-105 transform">
+                        AÑADIR AL CARRITO
+                    </button>
+                    
+                    <!-- Trust Badges -->
+                    <div class="flex flex-col sm:flex-row items-center justify-center gap-6 text-base text-gray-600 pt-6 border-t">
+                        <div class="flex items-center gap-2">
+                            <i class="ph ph-truck text-xl"></i>
+                            <span>Envío gratis</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="ph ph-arrow-counter-clockwise text-xl"></i>
+                            <span>Devolución 30 días</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-brand-primary text-white py-12 sm:py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 sm:gap-10 mb-10">
+                <!-- Brand -->
+                <div>
+                    <h3 class="text-xl sm:text-2xl font-bold mb-4 text-brand-accent">REVERSAL.</h3>
+                    <p class="text-gray-400 text-base">
+                        Ciencia avanzada para la reversión natural de canas.
+                    </p>
+                </div>
+                
+                <!-- Links -->
+                <div>
+                    <h4 class="font-semibold mb-4 text-lg">Enlaces</h4>
+                    <ul class="space-y-3 text-base">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">FAQ</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Contacto</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Términos y Condiciones</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Política de Privacidad</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Social -->
+                <div>
+                    <h4 class="font-semibold mb-4 text-lg">Síguenos</h4>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-12 h-12 bg-white/10 hover:bg-brand-accent rounded-full flex items-center justify-center transition-all" aria-label="Instagram">
+                            <i class="ph ph-instagram-logo text-2xl"></i>
+                        </a>
+                        <a href="#" class="w-12 h-12 bg-white/10 hover:bg-brand-accent rounded-full flex items-center justify-center transition-all" aria-label="Facebook">
+                            <i class="ph ph-facebook-logo text-2xl"></i>
+                        </a>
+                        <a href="#" class="w-12 h-12 bg-white/10 hover:bg-brand-accent rounded-full flex items-center justify-center transition-all" aria-label="Twitter">
+                            <i class="ph ph-twitter-logo text-2xl"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Copyright -->
+            <div class="pt-8 border-t border-white/10 text-center text-base text-gray-400">
+                © 2025 REVERSAL. Todos los derechos reservados.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Cart state
+        let cart = [];
+        
+        // Toggle login modal
+        function toggleLogin() {
+            const modal = document.getElementById('login-modal');
+            modal.classList.toggle('hidden');
+        }
+        
+        // Toggle registration modal
+        function toggleRegister() {
+            const modal = document.getElementById('register-modal');
+            modal.classList.toggle('hidden');
+        }
+        
+        // Toggle cart modal
+        function toggleCart() {
+            const modal = document.getElementById('cart-modal');
+            modal.classList.toggle('hidden');
+        }
+        
+        // Add to cart
+        function addToCart(name, price) {
+            cart.push({ name, price });
+            updateCart();
+            toggleCart();
+        }
+        
+        // Update cart display
+        function updateCart() {
+            const badge = document.getElementById('cart-badge');
+            const itemsContainer = document.getElementById('cart-items');
+            const totalElement = document.getElementById('cart-total');
+            
+            badge.textContent = cart.length;
+            
+            if (cart.length === 0) {
+                itemsContainer.innerHTML = `
+                    <div class="text-center text-gray-500 py-12">
+                        <i class="ph ph-shopping-cart text-6xl mb-4 block"></i>
+                        <p>Tu carrito está vacío</p>
+                    </div>
+                `;
+                totalElement.textContent = '$0.00';
+            } else {
+                const total = cart.reduce((sum, item) => sum + item.price, 0);
+                itemsContainer.innerHTML = cart.map((item, index) => `
+                    <div class="flex items-center justify-between py-4 border-b">
+                        <div class="flex-1">
+                            <h4 class="font-semibold">${item.name}</h4>
+                            <p class="text-sm text-gray-600">$${item.price.toFixed(2)}</p>
+                        </div>
+                        <button onclick="removeFromCart(${index})" class="p-2 hover:bg-gray-100 rounded-full transition-colors">
+                            <i class="ph ph-trash text-red-500"></i>
+                        </button>
+                    </div>
+                `).join('');
+                totalElement.textContent = `$${total.toFixed(2)}`;
+            }
+        }
+        
+        // Remove from cart
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCart();
+        }
+        
+        // Carousel scroll
+        function scrollCarousel(direction) {
+            const carousel = document.getElementById('carousel');
+            const scrollAmount = 400;
+            carousel.scrollBy({
+                left: direction * scrollAmount,
+                behavior: 'smooth'
+            });
+        }
+        
+        // Close modals on outside click
+        document.getElementById('login-modal').addEventListener('click', function(e) {
+            if (e.target === this) toggleLogin();
+        });
+        
+        document.getElementById('register-modal').addEventListener('click', function(e) {
+            if (e.target === this) toggleRegister();
+        });
+        
+        document.getElementById('cart-modal').addEventListener('click', function(e) {
+            if (e.target === this) toggleCart();
+        });
+    </script>
+
+</body>
+</html>
