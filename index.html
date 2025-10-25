@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>REVERSAL - Suero Peptídico para Reversión de Canas</title>
+    <title>O'GRAY - Suero Peptídico para Reversión de Canas</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -60,14 +60,16 @@
         .delay-400 { animation-delay: 0.4s; }
     </style>
     
+    <!-- *** PALETA DE COLORES DOBLE ACTUALIZADA *** -->
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        'brand-primary': '#1a1a1a',
-                        'brand-accent': '#10b981',
-                        'brand-light': '#f8f9fa',
+                        'brand-primary': '#5a3a2e',           /* Marrón Oscuro (Texto, Header, Footer) */
+                        'brand-accent': '#6B7A4A',           /* Verde Salvia (Botones, CTAs) */
+                        'brand-accent-secondary': '#c3a370', /* Dorado (Precios, Estrellas, Highlights) */
+                        'brand-light': '#f5f3f0',           /* Beige/Crema claro (Fondos) */
                     }
                 }
             }
@@ -81,11 +83,11 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-wrap items-center justify-between gap-4">
                 <div class="flex items-center gap-6">
-                    <button class="flex items-center gap-2 hover:text-brand-accent transition-colors">
+                    <button class="flex items-center gap-2 hover:text-brand-accent-secondary transition-colors">
                         <i class="ph ph-map-pin"></i>
                         <span class="hidden sm:inline">TIENDAS</span>
                     </button>
-                    <button class="flex items-center gap-2 hover:text-brand-accent transition-colors">
+                    <button class="flex items-center gap-2 hover:text-brand-accent-secondary transition-colors">
                         <i class="ph ph-headset"></i>
                         <span class="hidden sm:inline">ATENCIÓN AL CLIENTE</span>
                     </button>
@@ -103,15 +105,15 @@
             <div class="flex items-center justify-between h-20">
                 <!-- Logo -->
                 <div class="flex-shrink-0">
-                    <h1 class="text-2xl md:text-3xl font-bold tracking-tight">REVERSAL.</h1>
+                    <h1 class="text-2xl md:text-3xl font-bold tracking-tight">O'GRAY.</h1>
                 </div>
                 
                 <!-- Navigation (Hidden on mobile) -->
                 <nav class="hidden lg:flex items-center space-x-8">
-                    <a href="#productos" class="text-sm font-medium hover:text-brand-accent transition-colors uppercase tracking-wide">Productos</a>
-                    <a href="#ciencia" class="text-sm font-medium hover:text-brand-accent transition-colors uppercase tracking-wide">Ciencia</a>
-                    <a href="#resultados" class="text-sm font-medium hover:text-brand-accent transition-colors uppercase tracking-wide">Resultados</a>
-                    <a href="#comprar" class="text-sm font-medium hover:text-brand-accent transition-colors uppercase tracking-wide">Comprar</a>
+                    <a href="#productos" class="text-sm font-medium hover:text-brand-accent-secondary transition-colors uppercase tracking-wide">Productos</a>
+                    <a href="#ciencia" class="text-sm font-medium hover:text-brand-accent-secondary transition-colors uppercase tracking-wide">Ciencia</a>
+                    <a href="#resultados" class="text-sm font-medium hover:text-brand-accent-secondary transition-colors uppercase tracking-wide">Resultados</a>
+                    <a href="#comprar" class="text-sm font-medium hover:text-brand-accent-secondary transition-colors uppercase tracking-wide">Comprar</a>
                 </nav>
                 
                 <!-- Search and Icons -->
@@ -131,6 +133,7 @@
                     </button>
                     <button onclick="toggleCart()" class="p-2 hover:bg-white/10 rounded-full transition-colors relative" aria-label="Carrito">
                         <i class="ph ph-shopping-cart text-2xl"></i>
+                        <!-- Badge usa color Verde -->
                         <span id="cart-badge" class="absolute top-0 right-0 w-5 h-5 bg-brand-accent text-white text-xs rounded-full flex items-center justify-center font-semibold">0</span>
                     </button>
                 </div>
@@ -144,33 +147,29 @@
             <button onclick="toggleLogin()" class="absolute top-4 right-4 p-2 hover:bg-gray-100 rounded-full transition-colors">
                 <i class="ph ph-x text-xl"></i>
             </button>
-            
             <h2 class="text-2xl font-bold mb-6 text-brand-primary">Iniciar Sesión</h2>
-            
             <form class="space-y-4">
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-2">Correo Electrónico</label>
                     <input type="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent outline-none transition-all" placeholder="tu@email.com" />
                 </div>
-                
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-2">Contraseña</label>
                     <input type="password" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent outline-none transition-all" placeholder="••••••••" />
                 </div>
-                
                 <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 text-sm">
                     <label class="flex items-center gap-2">
                         <input type="checkbox" class="w-4 h-4 text-brand-accent rounded" />
                         <span class="text-gray-600">Recordarme</span>
                     </label>
+                    <!-- Link usa color Verde -->
                     <a href="#" class="text-brand-accent hover:underline">¿Olvidaste tu contraseña?</a>
                 </div>
-                
-                <button type="submit" class="w-full bg-brand-accent hover:bg-emerald-600 text-white font-semibold py-3 rounded-lg transition-all">
+                <!-- Botón usa color Verde -->
+                <button type="submit" class="w-full bg-brand-accent hover:opacity-80 text-white font-semibold py-3 rounded-lg transition-all">
                     Iniciar Sesión
                 </button>
             </form>
-            
             <div class="mt-6 text-center text-sm text-gray-600">
                 ¿No tienes cuenta? <button onclick="toggleLogin(); toggleRegister();" class="text-brand-accent hover:underline font-semibold">Regístrate</button>
             </div>
@@ -183,42 +182,35 @@
             <button onclick="toggleRegister()" class="absolute top-4 right-4 p-2 hover:bg-gray-100 rounded-full transition-colors">
                 <i class="ph ph-x text-xl"></i>
             </button>
-            
             <h2 class="text-2xl font-bold mb-6 text-brand-primary">Crear Cuenta</h2>
-            
             <form class="space-y-4">
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-2">Nombre Completo</label>
                     <input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent outline-none transition-all" placeholder="Juan Pérez" />
                 </div>
-                
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-2">Correo Electrónico</label>
                     <input type="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent outline-none transition-all" placeholder="tu@email.com" />
                 </div>
-                
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-2">Contraseña</label>
                     <input type="password" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent outline-none transition-all" placeholder="••••••••" />
                 </div>
-                
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-2">Confirmar Contraseña</label>
                     <input type="password" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent outline-none transition-all" placeholder="••••••••" />
                 </div>
-                
                 <div class="text-sm">
                     <label class="flex items-start gap-2">
                         <input type="checkbox" class="w-4 h-4 text-brand-accent rounded mt-1" />
                         <span class="text-gray-600">Acepto los <a href="#" class="text-brand-accent hover:underline">términos y condiciones</a> y la <a href="#" class="text-brand-accent hover:underline">política de privacidad</a></span>
                     </label>
                 </div>
-                
-                <button type="submit" class="w-full bg-brand-accent hover:bg-emerald-600 text-white font-semibold py-3 rounded-lg transition-all">
+                <!-- Botón usa color Verde -->
+                <button type="submit" class="w-full bg-brand-accent hover:opacity-80 text-white font-semibold py-3 rounded-lg transition-all">
                     Crear Cuenta
                 </button>
             </form>
-            
             <div class="mt-6 text-center text-sm text-gray-600">
                 ¿Ya tienes cuenta? <button onclick="toggleRegister(); toggleLogin();" class="text-brand-accent hover:underline font-semibold">Inicia Sesión</button>
             </div>
@@ -234,20 +226,20 @@
                     <i class="ph ph-x text-xl"></i>
                 </button>
             </div>
-            
             <div id="cart-items" class="flex-1 overflow-y-auto p-4 sm:p-6">
                 <div class="text-center text-gray-500 py-12">
                     <i class="ph ph-shopping-cart text-6xl mb-4 block"></i>
                     <p>Tu carrito está vacío</p>
                 </div>
             </div>
-            
             <div class="border-t p-4 sm:p-6 space-y-4">
                 <div class="flex items-center justify-between text-lg font-semibold">
                     <span>Total:</span>
-                    <span id="cart-total" class="text-brand-accent text-2xl">$0.00</span>
+                    <!-- Total usa color Dorado -->
+                    <span id="cart-total" class="text-brand-accent-secondary text-2xl">$0.00</span>
                 </div>
-                <button class="w-full bg-brand-accent hover:bg-emerald-600 text-white font-bold py-4 rounded-lg transition-all">
+                <!-- Botón usa color Verde -->
+                <button class="w-full bg-brand-accent hover:opacity-80 text-white font-bold py-4 rounded-lg transition-all">
                     Proceder al Pago
                 </button>
                 <button onclick="toggleCart()" class="w-full border-2 border-gray-300 hover:border-gray-400 font-semibold py-4 rounded-lg transition-all">
@@ -257,73 +249,72 @@
         </div>
     </div>
 
-    <!-- Redesigned hero section with green gradient background and product image on left -->
-    <section class="relative py-16 md:py-20 lg:py-24 xl:py-32 overflow-hidden bg-gradient-to-br from-emerald-600 via-emerald-500 to-teal-500">
-        <!-- Decorative overlay -->
-        <div class="absolute inset-0 bg-black/10"></div>
+    <!-- *** SECCIÓN HERO CON VIDEO FULL WIDTH Y TEXTO DEBAJO *** -->
+    <section class="relative overflow-hidden bg-gradient-to-br from-brand-light via-white to-white">
+        <!-- Contenedor del Video - Ancho Completo -->
+        <div class="w-full fade-in-up">
+             <video 
+                src="o-gray-hero.mp4" 
+                alt="Suero Peptídico O'GRAY"
+                class="w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] xl:h-[700px] object-cover"
+                autoplay 
+                loop 
+                muted 
+                playsinline
+            >
+                Tu navegador no soporta el video.
+            </video>
+        </div>
         
-        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-                <!-- Left Column - Product Image -->
-                <div class="order-2 lg:order-1 fade-in-up">
-                    <div class="relative">
-                        <img 
-                            src="/placeholder.svg?height=1400&width=1400" 
-                            alt="Suero Peptídico Reversal"
-                            class="w-full h-auto drop-shadow-2xl hover:scale-105 transition-transform duration-500"
-                        />
-                    </div>
+        <!-- Contenedor del Texto - Debajo del video -->
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20 lg:py-24">
+            <div class="max-w-4xl mx-auto text-center space-y-8 fade-in-up delay-200">
+                 <div class="inline-block">
+                    <span class="bg-brand-accent/20 backdrop-blur-sm text-brand-primary px-4 py-2 rounded-full text-sm font-semibold uppercase tracking-wide">
+                        Regalo en compra ↓
+                    </span>
                 </div>
                 
-                <!-- Right Column - Text Content -->
-                <div class="order-1 lg:order-2 space-y-8 fade-in-up delay-200">
-                    <div class="inline-block">
-                        <span class="bg-white/20 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm font-semibold uppercase tracking-wide">
-                            Regalo en compra ↓
-                        </span>
+                <h2 class="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-black tracking-tight leading-[1.05] text-balance text-brand-primary">
+                    EL FUTURO DE TU CABELLO ESTÁ AQUÍ
+                </h2>
+                
+                <p class="text-xl sm:text-2xl lg:text-3xl text-gray-600/95 leading-relaxed text-pretty font-medium">
+                    Descubre O'GRAY, la ciencia de la repigmentación.
+                </p>
+                
+                <div class="pt-4">
+                    <a href="#comprar" class="inline-block bg-brand-accent hover:opacity-80 text-white font-bold px-12 py-6 rounded-xl transition-all text-xl shadow-2xl hover:shadow-3xl hover:scale-105 transform uppercase tracking-wide">
+                        Comprar Ahora
+                    </a>
+                </div>
+                
+                <div class="flex flex-wrap items-center justify-center gap-8 pt-4 text-brand-primary/90">
+                    <div class="flex items-center gap-2">
+                        <i class="ph ph-truck text-2xl"></i>
+                        <span class="text-sm font-medium">Envío Gratis</span>
                     </div>
-                    
-                    <h2 class="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-black tracking-tight leading-[1.05] text-balance text-white">
-                        NUESTRO SUERO PEPTÍDICO ESTÁ DE REGRESO
-                    </h2>
-                    
-                    <p class="text-xl sm:text-2xl lg:text-3xl text-white/95 leading-relaxed text-pretty font-medium">
-                        ¡Encuentra una sorpresa cada día!
-                    </p>
-                    
-                    <div class="pt-4">
-                        <a href="#comprar" class="inline-block bg-white hover:bg-gray-100 text-brand-primary font-bold px-12 py-6 rounded-xl transition-all text-xl shadow-2xl hover:shadow-3xl hover:scale-105 transform uppercase tracking-wide">
-                            Comprar Ahora
-                        </a>
+                    <div class="flex items-center gap-2">
+                        <i class="ph ph-shield-check text-2xl"></i>
+                        <span class="text-sm font-medium">Garantía 30 Días</span>
                     </div>
-                    
-                    <div class="flex flex-wrap items-center gap-8 pt-4 text-white/90">
-                        <div class="flex items-center gap-2">
-                            <i class="ph ph-truck text-2xl"></i>
-                            <span class="text-sm font-medium">Envío Gratis</span>
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <i class="ph ph-shield-check text-2xl"></i>
-                            <span class="text-sm font-medium">Garantía 30 Días</span>
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <i class="ph ph-certificate text-2xl"></i>
-                            <span class="text-sm font-medium">Clínicamente Probado</span>
-                        </div>
+                    <div class="flex items-center gap-2">
+                        <i class="ph ph-certificate text-2xl"></i>
+                        <span class="text-sm font-medium">Clínicamente Probado</span>
                     </div>
                 </div>
             </div>
         </div>
         
-        <!-- Decorative wave at bottom -->
+        <!-- Mantenemos la ola decorativa si quieres, o la quitamos para un look más limpio -->
         <div class="absolute bottom-0 left-0 right-0">
-            <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto">
+             <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto">
                 <path d="M0 0L60 10C120 20 240 40 360 46.7C480 53 600 47 720 43.3C840 40 960 40 1080 46.7C1200 53 1320 67 1380 73.3L1440 80V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0V0Z" fill="white"/>
             </svg>
         </div>
     </section>
 
-    <!-- Added alternating background and increased font sizes -->
+    <!-- Products Section -->
     <section id="productos" class="py-16 sm:py-20 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12 sm:mb-16 fade-in-up">
@@ -336,15 +327,21 @@
             <div class="relative">
                 <div id="carousel" class="carousel-container flex gap-6 sm:gap-8 overflow-x-auto pb-4">
                     <!-- Product 1 -->
-                    <!-- Increased carousel product images to 600x600 -->
                     <div class="carousel-item flex-shrink-0 w-80 sm:w-96 fade-in-up delay-100">
                         <div class="bg-brand-light rounded-2xl p-6 sm:p-8 h-full transition-all hover:scale-105 hover:shadow-xl">
-                            <img src="/placeholder.svg?height=600&width=600" alt="Suero Peptídico" class="w-full h-56 sm:h-72 object-cover rounded-xl mb-6" />
+                            <img 
+                                src="https://placehold.co/600x600/f5f3f0/5a3a2e?text=O\'GRAY+Suero&font=inter" 
+                                alt="Suero Peptídico O'GRAY" 
+                                class="w-full h-56 sm:h-72 object-cover rounded-xl mb-6" 
+                                onerror="this.src='https://placehold.co/600x600/eeeeee/999999?text=Imagen+no+disponible'"
+                            />
                             <h3 class="font-bold text-xl sm:text-2xl mb-3">Suero Peptídico</h3>
                             <p class="text-gray-600 text-base mb-6">Tratamiento intensivo para reversión de canas</p>
                             <div class="flex items-center justify-between">
-                                <span class="text-2xl sm:text-3xl font-bold text-brand-accent">$59.99</span>
-                                <button onclick="addToCart('Suero Peptídico', 59.99)" class="bg-brand-accent hover:bg-emerald-600 text-white px-6 sm:px-8 py-3 rounded-lg transition-all text-base font-semibold">
+                                <!-- Precio usa color Dorado -->
+                                <span class="text-2xl sm:text-3xl font-bold text-brand-accent-secondary">$59.99</span>
+                                <!-- Botón usa color Verde -->
+                                <button onclick="addToCart('Suero Peptídico', 59.99)" class="bg-brand-accent hover:opacity-80 text-white px-6 sm:px-8 py-3 rounded-lg transition-all text-base font-semibold">
                                     Añadir
                                 </button>
                             </div>
@@ -354,12 +351,17 @@
                     <!-- Product 2 -->
                     <div class="carousel-item flex-shrink-0 w-80 sm:w-96 fade-in-up delay-200">
                         <div class="bg-brand-light rounded-2xl p-6 sm:p-8 h-full transition-all hover:scale-105 hover:shadow-xl">
-                            <img src="/placeholder.svg?height=600&width=600" alt="Shampoo Fortificante" class="w-full h-56 sm:h-72 object-cover rounded-xl mb-6" />
+                            <img 
+                                src="https://placehold.co/600x600/f5f3f0/6B7A4A?text=Shampoo+O\'GRAY&font=inter" 
+                                alt="Shampoo Fortificante" 
+                                class="w-full h-56 sm:h-72 object-cover rounded-xl mb-6" 
+                                onerror="this.src='https://placehold.co/600x600/eeeeee/999999?text=Imagen+no+disponible'"
+                            />
                             <h3 class="font-bold text-xl sm:text-2xl mb-3">Shampoo Fortificante</h3>
                             <p class="text-gray-600 text-base mb-6">Limpieza profunda con protección de color</p>
                             <div class="flex items-center justify-between">
-                                <span class="text-2xl sm:text-3xl font-bold text-brand-accent">$29.99</span>
-                                <button onclick="addToCart('Shampoo Fortificante', 29.99)" class="bg-brand-accent hover:bg-emerald-600 text-white px-6 sm:px-8 py-3 rounded-lg transition-all text-base font-semibold">
+                                <span class="text-2xl sm:text-3xl font-bold text-brand-accent-secondary">$29.99</span>
+                                <button onclick="addToCart('Shampoo Fortificante', 29.99)" class="bg-brand-accent hover:opacity-80 text-white px-6 sm:px-8 py-3 rounded-lg transition-all text-base font-semibold">
                                     Añadir
                                 </button>
                             </div>
@@ -369,12 +371,17 @@
                     <!-- Product 3 -->
                     <div class="carousel-item flex-shrink-0 w-80 sm:w-96 fade-in-up delay-300">
                         <div class="bg-brand-light rounded-2xl p-6 sm:p-8 h-full transition-all hover:scale-105 hover:shadow-xl">
-                            <img src="/placeholder.svg?height=600&width=600" alt="Acondicionador" class="w-full h-56 sm:h-72 object-cover rounded-xl mb-6" />
+                            <img 
+                                src="https://placehold.co/600x600/f5f3f0/6B7A4A?text=Acondicionador+O\'GRAY&font=inter" 
+                                alt="Acondicionador" 
+                                class="w-full h-56 sm:h-72 object-cover rounded-xl mb-6" 
+                                onerror="this.src='https://placehold.co/600x600/eeeeee/999999?text=Imagen+no+disponible'"
+                            />
                             <h3 class="font-bold text-xl sm:text-2xl mb-3">Acondicionador Nutritivo</h3>
                             <p class="text-gray-600 text-base mb-6">Hidratación profunda y brillo natural</p>
                             <div class="flex items-center justify-between">
-                                <span class="text-2xl sm:text-3xl font-bold text-brand-accent">$29.99</span>
-                                <button onclick="addToCart('Acondicionador Nutritivo', 29.99)" class="bg-brand-accent hover:bg-emerald-600 text-white px-6 sm:px-8 py-3 rounded-lg transition-all text-base font-semibold">
+                                <span class="text-2xl sm:text-3xl font-bold text-brand-accent-secondary">$29.99</span>
+                                <button onclick="addToCart('Acondicionador Nutritivo', 29.99)" class="bg-brand-accent hover:opacity-80 text-white px-6 sm:px-8 py-3 rounded-lg transition-all text-base font-semibold">
                                     Añadir
                                 </button>
                             </div>
@@ -384,12 +391,17 @@
                     <!-- Product 4 -->
                     <div class="carousel-item flex-shrink-0 w-80 sm:w-96 fade-in-up delay-400">
                         <div class="bg-brand-light rounded-2xl p-6 sm:p-8 h-full transition-all hover:scale-105 hover:shadow-xl">
-                            <img src="/placeholder.svg?height=600&width=600" alt="Kit Completo" class="w-full h-56 sm:h-72 object-cover rounded-xl mb-6" />
+                            <img 
+                                src="https://placehold.co/600x600/f5f3f0/5a3a2e?text=Kit+Completo+O\'GRAY&font=inter" 
+                                alt="Kit Completo" 
+                                class="w-full h-56 sm:h-72 object-cover rounded-xl mb-6" 
+                                onerror="this.src='https://placehold.co/600x600/eeeeee/999999?text=Imagen+no+disponible'"
+                            />
                             <h3 class="font-bold text-xl sm:text-2xl mb-3">Kit Completo</h3>
                             <p class="text-gray-600 text-base mb-6">Rutina completa para mejores resultados</p>
                             <div class="flex items-center justify-between">
-                                <span class="text-2xl sm:text-3xl font-bold text-brand-accent">$99.99</span>
-                                <button onclick="addToCart('Kit Completo', 99.99)" class="bg-brand-accent hover:bg-emerald-600 text-white px-6 sm:px-8 py-3 rounded-lg transition-all text-base font-semibold">
+                                <span class="text-2xl sm:text-3xl font-bold text-brand-accent-secondary">$99.99</span>
+                                <button onclick="addToCart('Kit Completo', 99.99)" class="bg-brand-accent hover:opacity-80 text-white px-6 sm:px-8 py-3 rounded-lg transition-all text-base font-semibold">
                                     Añadir
                                 </button>
                             </div>
@@ -408,12 +420,12 @@
         </div>
     </section>
 
-    <!-- Added gradient background and increased font sizes -->
-    <section class="py-16 sm:py-20 md:py-28 bg-gradient-to-b from-gray-50 to-white">
+    <!-- Why Choose Us Section -->
+    <section class="py-16 sm:py-20 md:py-28 bg-gradient-to-b from-brand-light to-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12 sm:mb-16 fade-in-up">
                 <h2 class="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 text-balance text-brand-primary">
-                    ¿Por qué elegir <span class="text-brand-accent">REVERSAL</span>?
+                    ¿Por qué elegir <span class="text-brand-accent">O'GRAY</span>?
                 </h2>
                 <p class="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto text-pretty">
                     No somos solo otro producto para el cabello. Somos ciencia respaldada por resultados.
@@ -461,7 +473,7 @@
                     </div>
                     <h3 class="text-xl sm:text-2xl font-bold mb-4 text-brand-primary">Resultados Rápidos</h3>
                     <p class="text-gray-600 leading-relaxed text-base">
-                        Mientras otros productos tardan meses, REVERSAL muestra cambios visibles en solo 8 semanas de uso constante.
+                        Mientras otros productos tardan meses, O'GRAY muestra cambios visibles en solo 8 semanas de uso constante.
                     </p>
                 </div>
                 
@@ -490,7 +502,7 @@
         </div>
     </section>
 
-    <!-- Increased font sizes for benefits section -->
+    <!-- Science Section -->
     <section id="ciencia" class="py-16 sm:py-20 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10">
@@ -533,8 +545,8 @@
         </div>
     </section>
 
-    <!-- Added gradient background and increased font sizes -->
-    <section id="resultados" class="py-16 sm:py-20 md:py-28 bg-gradient-to-b from-gray-50 to-white">
+    <!-- Results Section (Antes y Después) -->
+    <section id="resultados" class="py-16 sm:py-20 md:py-28 bg-gradient-to-b from-brand-light to-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12 sm:mb-16 fade-in-up">
                 <h2 class="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 text-balance text-brand-primary">
@@ -547,12 +559,12 @@
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 lg:gap-10 max-w-5xl mx-auto">
                 <!-- Before Image -->
-                <!-- Increased before/after images to 1000x1200 for better detail -->
                 <div class="relative group fade-in-up delay-100">
                     <img 
-                        src="/placeholder.svg?height=1200&width=1000" 
+                        src="https://placehold.co/1000x1200/E0E0E0/555555?text=ANTES+(Cabello+con+canas)&font=inter" 
                         alt="Antes - Semana 1"
                         class="w-full h-auto rounded-xl shadow-lg hover:shadow-2xl transition-all"
+                        onerror="this.src='https://placehold.co/1000x1200/eeeeee/999999?text=Imagen+no+disponible'"
                     />
                     <div class="absolute top-4 left-4 bg-white/95 backdrop-blur-sm px-5 py-3 rounded-full shadow-md border border-gray-200">
                         <span class="text-sm sm:text-base font-bold text-gray-900">ANTES (Semana 1)</span>
@@ -562,9 +574,10 @@
                 <!-- After Image -->
                 <div class="relative group fade-in-up delay-200">
                     <img 
-                        src="/placeholder.svg?height=1200&width=1000" 
+                        src="https://placehold.co/1000x1200/D0D0D0/333333?text=DESPUÉS+(Cabello+oscuro)&font=inter" 
                         alt="Después - Semana 8"
                         class="w-full h-auto rounded-xl shadow-lg hover:shadow-2xl transition-all"
+                        onerror="this.src='https://placehold.co/1000x1200/eeeeee/999999?text=Imagen+no+disponible'"
                     />
                     <div class="absolute top-4 left-4 bg-white/95 backdrop-blur-sm px-5 py-3 rounded-full shadow-md border border-gray-200">
                         <span class="text-sm sm:text-base font-bold text-gray-900">DESPUÉS (Semana 8)</span>
@@ -572,45 +585,46 @@
                 </div>
             </div>
             
-            <!-- Increased stats font sizes -->
             <div class="mt-12 sm:mt-16 grid grid-cols-3 gap-6 sm:gap-8 max-w-3xl mx-auto">
                 <div class="text-center fade-in-up delay-100">
-                    <div class="text-3xl sm:text-4xl lg:text-5xl font-black text-brand-accent">90%</div>
+                    <!-- Stats usan color Dorado -->
+                    <div class="text-3xl sm:text-4xl lg:text-5xl font-black text-brand-accent-secondary">90%</div>
                     <div class="text-sm sm:text-base text-gray-600 mt-2">Repigmentación visible</div>
                 </div>
                 <div class="text-center fade-in-up delay-200">
-                    <div class="text-3xl sm:text-4xl lg:text-5xl font-black text-brand-accent">8</div>
+                    <div class="text-3xl sm:text-4xl lg:text-5xl font-black text-brand-accent-secondary">8</div>
                     <div class="text-sm sm:text-base text-gray-600 mt-2">Semanas promedio</div>
                 </div>
                 <div class="text-center fade-in-up delay-300">
-                    <div class="text-3xl sm:text-4xl lg:text-5xl font-black text-brand-accent">4.9</div>
+                    <div class="text-3xl sm:text-4xl lg:text-5xl font-black text-brand-accent-secondary">4.9</div>
                     <div class="text-sm sm:text-base text-gray-600 mt-2">Calificación promedio</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Increased font sizes for purchase section -->
+    <!-- Purchase Section -->
     <section id="comprar" class="py-16 sm:py-20 md:py-28 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center max-w-6xl mx-auto">
                 <!-- Left Column - Product Image -->
                 <div class="order-2 lg:order-1 fade-in-up">
-                    <!-- Increased purchase section image to 1200x1200 for detailed product view -->
                     <img 
-                        src="/placeholder.svg?height=1200&width=1200" 
-                        alt="Suero Peptídico Reversal - Detalle"
+                        src="https://placehold.co/1200x1200/f5f3f0/5a3a2e?text=Detalle+O\'GRAY&font=inter" 
+                        alt="Suero Peptídico O'GRAY - Detalle"
                         class="w-full h-auto rounded-2xl shadow-2xl hover:scale-105 transition-transform duration-500"
+                        onerror="this.src='https://placehold.co/1200x1200/eeeeee/999999?text=Imagen+no+disponible'"
                     />
                 </div>
                 
                 <!-- Right Column - Purchase Form -->
-                <div class="order-1 lg:order-2 bg-gradient-to-br from-gray-50 to-white rounded-2xl shadow-xl p-8 sm:p-10 lg:p-12 fade-in-up delay-200">
-                    <h3 class="text-3xl sm:text-4xl font-bold mb-3 text-brand-primary">Suero Peptídico Reversal</h3>
+                <div class="order-1 lg:order-2 bg-gradient-to-br from-brand-light to-white rounded-2xl shadow-xl p-8 sm:p-10 lg:p-12 fade-in-up delay-200">
+                    <h3 class="text-3xl sm:text-4xl font-bold mb-3 text-brand-primary">Suero Peptídico O'GRAY</h3>
                     
                     <!-- Reviews -->
                     <div class="flex items-center gap-2 mb-8">
-                        <div class="flex text-yellow-400 text-xl">
+                        <!-- Estrellas usan color Dorado -->
+                        <div class="flex text-brand-accent-secondary text-xl">
                             <i class="ph-fill ph-star"></i>
                             <i class="ph-fill ph-star"></i>
                             <i class="ph-fill ph-star"></i>
@@ -622,7 +636,8 @@
                     
                     <!-- Price -->
                     <div class="mb-8">
-                        <span class="text-4xl sm:text-5xl font-black text-brand-accent">$59.99</span>
+                        <!-- Precio usa color Dorado -->
+                        <span class="text-4xl sm:text-5xl font-black text-brand-accent-secondary">$59.99</span>
                         <span class="text-gray-500 ml-2 text-lg">USD</span>
                     </div>
                     
@@ -638,23 +653,25 @@
                         </label>
                         
                         <!-- Option 2 - Highlighted -->
-                        <label class="flex items-center p-5 border-2 border-brand-accent bg-emerald-50 rounded-xl cursor-pointer relative">
+                        <!-- Borde usa color Dorado -->
+                        <label class="flex items-center p-5 border-2 border-brand-accent-secondary bg-brand-accent-secondary/10 rounded-xl cursor-pointer relative">
                             <input type="radio" name="purchase-option" class="w-5 h-5 text-brand-accent" checked />
                             <div class="ml-4 flex-1">
                                 <div class="font-semibold flex flex-wrap items-center gap-2 text-base sm:text-lg">
                                     Suscríbete y Ahorra 15%
-                                    <span class="text-xs bg-brand-accent text-white px-3 py-1 rounded-full font-bold">POPULAR</span>
+                                    <!-- Tag usa color Dorado -->
+                                    <span class="text-xs bg-brand-accent-secondary text-white px-3 py-1 rounded-full font-bold">POPULAR</span>
                                 </div>
                                 <div class="text-base text-gray-600">
-                                    <span class="font-bold text-brand-accent text-lg">$50.99</span>
+                                    <span class="font-bold text-brand-accent-secondary text-lg">$50.99</span>
                                     <span class="line-through ml-2">$59.99</span>
                                 </div>
                             </div>
                         </label>
                     </div>
                     
-                    <!-- CTA Button -->
-                    <button class="w-full bg-brand-accent hover:bg-emerald-600 text-white font-bold py-5 px-6 rounded-xl transition-all mb-6 text-lg shadow-lg hover:shadow-xl hover:scale-105 transform">
+                    <!-- CTA Button usa color Verde -->
+                    <button class="w-full bg-brand-accent hover:opacity-80 text-white font-bold py-5 px-6 rounded-xl transition-all mb-6 text-lg shadow-lg hover:shadow-xl hover:scale-105 transform">
                         AÑADIR AL CARRITO
                     </button>
                     
@@ -680,7 +697,8 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 sm:gap-10 mb-10">
                 <!-- Brand -->
                 <div>
-                    <h3 class="text-xl sm:text-2xl font-bold mb-4 text-brand-accent">REVERSAL.</h3>
+                    <!-- Logo usa color Dorado -->
+                    <h3 class="text-xl sm:text-2xl font-bold mb-4 text-brand-accent-secondary">O'GRAY.</h3>
                     <p class="text-gray-400 text-base">
                         Ciencia avanzada para la reversión natural de canas.
                     </p>
@@ -716,7 +734,7 @@
             
             <!-- Copyright -->
             <div class="pt-8 border-t border-white/10 text-center text-base text-gray-400">
-                © 2025 REVERSAL. Todos los derechos reservados.
+                © 2025 O'GRAY. Todos los derechos reservados.
             </div>
         </div>
     </footer>
@@ -815,3 +833,4 @@
 
 </body>
 </html>
+
